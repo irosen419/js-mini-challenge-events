@@ -39,8 +39,51 @@ function toggleColor(element) {
     element.style.color = "red"
   }
 }
-
+let element = document.getElementById('header')
+document.getElementById('header').addEventListener('click', function (e) {
+  if (e.target === element) {
+    toggleColor(element)
+  }
+});
 
 /***** Deliverable 2 *****/
 
+document.addEventListener('DOMContentLoaded', () => {
+  let form = document.querySelector('#new-player-form')
+  form.addEventListener("submit", function (e) {
+    event.preventDefault();
+    let playerNumber = form.number.value
+    let playerName = form.name.value
+    let playerNickname = form.nickname.value
+    let playerPhoto = form.photo.value
+
+    let player = {
+      "number": playerNumber,
+      "name": playerName,
+      "nickname": playerNickname,
+      "photo": playerPhoto,
+      "likes": "0"
+    }
+
+    renderPlayer(player)
+    buttonEvents()
+  })
+
+
+})
+
+
 /***** Deliverable 3 *****/
+
+function buttonEvents() {
+
+  let buttons = document.getElementsByClassName('like-button')
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function (e) {
+      let likeNum = e.target.parentElement.getElementsByClassName('likes')[0].innerHTML
+      likeNum = likeNum.replace("likes", "")
+      likeNum = parseInt(likeNum, 10)
+      e.target.parentElement.getElementsByClassName('likes')[0].innerHTML = (likeNum + 1).toString()
+    });
+  }
+}
